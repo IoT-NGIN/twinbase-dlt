@@ -1,7 +1,9 @@
-# Twinbase
+# Twinbase DLT
 
-Twinbase is an open source platform for managing and distributing [digital twin documents](https://doi.org/10.1109/ACCESS.2020.3045856).
+Twinbase is an open-source platform for implementing [Semantic Twins](https://github.com/IoT-NGIN/guide-to-semantic-twins).
+In particular, Twinbase helps to manage and distribute [digital twin documents](https://doi.org/10.1109/ACCESS.2020.3045856).
 It is built on git and can be hosted on free-of-charge GitHub services.
+This new DLT (distributed ledger technology) version of Twinbase supports anchoring the history of twin documents into a distributed ledger.
 
 See an example server live at [dtw.twinbase.org](https://dtw.twinbase.org) and details in an open access journal article: Autiosalo, J., Siegel, J., Tammi, K., 2021. Twinbase: Open-Source Server Software for the Digital Twin Web. IEEE Access 9, 140779–140798. https://doi.org/10.1109/ACCESS.2021.3119487
 
@@ -52,14 +54,55 @@ Contribution guidelines are not yet established, but useful contributions are we
 
 Local development is a bit tricky as Twinbase uses GitHub Actions as an intergal part of the platform, but feel free to try!
 
+## Store hashes of twin documents to an Ethereum distributed ledger
+Hashes of twin documents (`index.json`) can be stored to a DLT (distributed ledger technology) for later verification of the integrity of the document. Hashes may be stored to a DLT with GitHub Actions.
+
+To make the DLT functionality work, you need to define following information:
+- `DLT_TYPE`
+  - Name of DLT, for example `Ethereum Sepolia Testnet`. This is used to sufficiently describe the DLT that is being used so that it can be found by a human verifying the document later.
+- `DLT_HTTP_NODE`
+  - DLT HTTP endpoint. You can create one at various node providers for free, for example, [Infura](https://www.infura.io/).
+- `DLT_PRIVATE_KEY`
+  - Combined "identity and password" for an [Ethereum account](https://ethereum.org/en/developers/docs/accounts/) (i.e. private key) with some currency for transaction fees. You can create one e.g. with python [web3.py library](https://web3py.readthedocs.io/en/stable/web3.eth.account.html#creating-a-private-key). You can add currency to you account e.g. [here](https://sepolia-faucet.pk910.de/).
+- `DLT_GAS_PROVIDED`
+  - Maximum gas limit that is provided with transactions. The realized gas usage depends on the difficulty of mining the transaction. Current gas market price against ether is calculated in the script. [Gas and fees info](https://ethereum.org/en/developers/docs/gas/).
+- `DLT_AUTOMATIC`
+  - Set to `true` to send hashes to DLT automatically when a DT document is modified or created. Otherwise, send hashes manually by running the `Submit twin document hash to DLT` workflow from the `Actions` tab.
+  - Allowed values: `true` or `false`
+
+These secrets and variables are set in the repository settings on GitHub under  
+ `Settings` > `Secrets and variables` > `Actions`.
+ > **Note**
+ > These can be set only by users with Admin access to the repository.
+   - Set `DLT_PRIVATE_KEY` as `New repository secret`.
+   - Set `DLT_HTTP_NODE`, `DLT_TYPE`, `DLT_GAS_PROVIDED` and `DLT_AUTOMATIC` as `Variables` > `New repository variable`.
+
+Examples of the GitHub secrets and variables required:
+```
+# Repository secrets:
+DLT_PRIVATE_KEY=0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+# Repository variables:
+DLT_TYPE="Ethereum Sepolia Testnet"
+DLT_HTTP_NODE=https://sepolia.infura.io/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+DLT_GAS_PROVIDED=100000
+DLT_AUTOMATIC=false
+```
+
+**Information of the transaction and hash is stored to a `hash-info.json` file within the twin folder.** The value `transactionHash` in this file can be used to discover the transaction within the DLT. The hash found in the DLT transaction as `input` should match the `twinHash` value found in `hash-info.json`.
+
 ## Support
 
 There are currently no official support mechanisms for Twinbase, but [Juuso](https://juu.so) may be able to help.
 
 ## Thanks
 
-Twinbase uses
+Python: See `requirements.txt` and `dev.in`
+
+JavaScript: Twinbase uses
 - [mini.css](https://minicss.org/) to stylize web pages and 
 - [json-view](https://github.com/pgrabovets/json-view) to display digital twin documents.
+- [web3.js](https://github.com/web3/web3.js) to perform crypto operations in the browser.
+  (Version [1.8.2](https://github.com/web3/web3.js/blob/632c5d3a7b91eeb436f043311db6350f950b3dda/dist/web3.min.js))
 
 Thanks to the developers for the nice pieces of software!
