@@ -1,0 +1,9 @@
+{
+    "dt-id": "https://dtid.org/8f97da4a-b178-4ca6-9f8d-3bce4c4f0f2f",
+    "hosting-iri": "https://IoT-NGIN.github.io/twinbase-dlt/8f97da4a-b178-4ca6-9f8d-3bce4c4f0f2f",
+    "name": "DLT test",
+    "description": "Testing DLT related stuff.",
+    "baseurl": "https://IoT-NGIN.github.io/twinbase-dlt",
+    "edit": "https://github.com/IoT-NGIN/twinbase-dlt/edit/main/docs/8f97da4a-b178-4ca6-9f8d-3bce4c4f0f2f/index.yaml",
+    "edit-json": "https://github.com/IoT-NGIN/twinbase-dlt/edit/main/docs/8f97da4a-b178-4ca6-9f8d-3bce4c4f0f2f/index.json"
+}
