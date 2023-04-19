@@ -6,3 +6,5 @@ new_twin_url: https://github.com/IoT-NGIN/twinbase-dlt/new/main?filename=docs/ed
 twins:
 - url: https://IoT-NGIN.github.io/twinbase-dlt/example-twin-e8fde635-e14a-41d7-85f0-676cd10cae32
   name: Example twin
+- url: https://IoT-NGIN.github.io/twinbase-dlt/8f97da4a-b178-4ca6-9f8d-3bce4c4f0f2f
+  name: DLT test
