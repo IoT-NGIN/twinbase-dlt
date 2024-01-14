@@ -4,7 +4,7 @@ owner:
 repo_url: https://github.com/IoT-NGIN/twinbase-dlt
 new_twin_url: https://github.com/IoT-NGIN/twinbase-dlt/new/main?filename=docs/edit_this_with_backspace/index.yaml&value=Paste%20a%20DT%20document%20template%20here
 twins:
-- url: https://IoT-NGIN.github.io/twinbase-dlt/example-twin-e8fde635-e14a-41d7-85f0-676cd10cae32
-  name: Example twin
 - url: https://IoT-NGIN.github.io/twinbase-dlt/8f97da4a-b178-4ca6-9f8d-3bce4c4f0f2f
   name: DLT test
+- url: https://IoT-NGIN.github.io/twinbase-dlt/example-twin-e8fde635-e14a-41d7-85f0-676cd10cae32
+  name: Example twin
